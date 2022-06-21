@@ -1,0 +1,53 @@
+
+.header {
+  width: 1030px;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 70px;
+    border-bottom: 1px solid #d2c1c1;
+  }
+
+  //Sneck
+
+  &__sneak {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__logo img {
+    height: 40px;
+    width: 40px;
+  }
+
+  &__title h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__title p {
+    font-size: 14px;
+    font-weight: 400;
+    color: $wark;
+  }
+  //   Header-ligh
+  &__ligh {
+    display: flex;
+    gap: 2em;
+    &__ligh p {
+      font-size: 14px;
+      font-weight: 600;
+      font-family: $main-fond;
+      color: $dark-wark;
+    }
+  }
+
+  &__cart {
+    position: relative;
+    top: 3px;
+    left: -10px;
+  }
+  &__icon {
+    padding-top: 4px;
+  }
+}

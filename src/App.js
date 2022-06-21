@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.scss";
+import { useEffect, useState } from "react";
+import Header from "./components/Header/Header";
+import Home from "./pages/Home";
+import { Routes, Route } from "react-router-dom";
+import BasketPages from "./pages/BasketPages";
+import { AppContext } from "./AppContext";
+import React from "react";
+import SheakersPages from "./pages/SheakersPages";
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const resp = await fetch("http://localhost:3000/db.json");
+      const data = await resp.json();
+
+      setData(data);
+    }
+    fetchData();
+  }, []);
+
+  // Seach
+  const [seach, setSeach] = React.useState("");
+
+  const onSeachInput = (e) => {
+    setSeach(e.target.value);
+  };
+
+  // Корзина
+
+  const [cart, setCart] = React.useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{
+        data,
+        onSeachInput,
+        seach,
+        cart,
+        setCart,
+      }}
+    >
+      <div className="App">
+        <div className="App__back ">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/basket" element={<BasketPages />} />
+            <Route path="/sneakers" element={<SheakersPages />} />
+          </Routes>
+        </div>
+      </div>
+    </AppContext.Provider>
   );
 }
 
